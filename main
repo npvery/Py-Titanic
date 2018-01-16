@@ -8,6 +8,29 @@ test = pd.read_csv("C:/Users/nicholasve/Downloads/test.csv")
 
 train.sample(3)
 
-#Visualize data using seaborn package
+###Visualize data using seaborn package
 
+#Plotting using the seaborn package. The "hue" field here will further split the data by the third variable.
 sns.barplot(x = "Embarked", y = "Survived", hue = "Sex", data = train)
+
+#Continued plotting with seaborn. Commands seem reasonable enough, I like seaborn. 
+#Many different linestyles to use; check documentation for more.
+sns.pointplot(x = "Pclass", y = "Survived", hue = "Sex", data = train, palette = {"male":"green", "female":"red"}, markers = ["*", "o"], linestyles = ["-", "--"])
+
+
+###Transforming features
+#Pretty new for me, so this will be interesting. Make age groups, maybe fare groups? Fare groups would just closely resemble Pclass.
+#Write as functions, then call functions as needed. This is just best practice.
+
+#Deal with missing age values and make age groups
+def simplify_ages(data):
+  data.Age = data.Age.fillna(-0.5)
+  bins = (-1, 0, 18, 35, 60, 120)
+  names = ["Unknown", "Child", "Young Adult", "Adult", "Elderly"]
+  age_groups = data.cut(train.Age, bins, labels = names, retbins = True)
+ 
+#Many entries don't have a value for cabin, but for those that do, cabin might provide a lot of predictive power. 
+def simplify_cabin(data):
+  data.Cabin = data.Cabin.fillna("N")
+  #Splits off the first cabin letter from the number, as it's probably more important.
+  data.Cabin = data.Cabin.apply(lambda x: x[0])

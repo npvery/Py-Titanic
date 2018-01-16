@@ -34,3 +34,5 @@ def simplify_cabin(data):
   data.Cabin = data.Cabin.fillna("N")
   #Splits off the first cabin letter from the number, as it's probably more important.
   data.Cabin = data.Cabin.apply(lambda x: x[0])
+  
+  #Test branch, remove

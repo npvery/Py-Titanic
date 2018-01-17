@@ -48,8 +48,8 @@ def simplify_fares(data):
   return data
   
 def simplify_names(data):
-  data["last-names"] = data.Name.apply(lambda x: x.split(",")[0])
-  data["title"] = data.Name.apply(lambda x: x.split(" ")[1])
+  data["Last-Name"] = data.Name.apply(lambda x: x.split(",")[0])
+  data["Prefix"] = data.Name.apply(lambda x: x.split(" ")[1])
   return(data)
   
 def drop_useless(data):
@@ -62,7 +62,11 @@ def transform(data):
   simplify_names(data)
   drop_useless(data)
   return data
-  
+
+train = transform(train)
+test = transform(test)
+train.head(5)
+test.head(5)
 
 
 

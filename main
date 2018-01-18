@@ -34,7 +34,7 @@ def simplify_ages(data):
  
 #Many entries don't have a value for cabin, but for those that do, cabin might provide a lot of predictive power. 
 def simplify_cabin(data):
-  data.Cabin = data.Cabin.fillna("N")
+  data.Cabin = data.Cabin.replace(np.nan, "N")
   #Splits off the first cabin letter from the number, as it's probably more important.
   data.Cabin = data.Cabin.apply(lambda x: x[0])
   return data
@@ -43,10 +43,10 @@ def simplify_cabin(data):
 #Use describe() to find quartiles, then bin using those.
 train.describe()
 def simplify_fares(data):
-  data.fare = data.fare.fillna(-0.5)
+  data.Fare = data.Fare.replace(np.nan, -0.5)
   bins = (-1, 0, FILL WITH QUARTILES)
   names = ["Unknown", "first-quartile", "second-quartile", "third-quartile", "fourth-quartile"]
-  data.fare = pd.cut(data.fare, bins, labels = names)
+  data.Fare = pd.cut(data.Fare, bins, labels = names)
   return data
   
 def simplify_names(data):

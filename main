@@ -23,11 +23,13 @@ sns.pointplot(x = "Pclass", y = "Survived", hue = "Sex", data = train, palette =
 #Write as functions, then call functions as needed. This is just best practice.
 
 #Deal with missing age values and make age groups
+#WORKING
 def simplify_ages(data):
-  data.Age = data.Age.fillna(-0.5)
+  data.Age = data.Age.replace(np.nan, -0.5)
   bins = (-1, 0, 18, 35, 60, 120)
   names = ["Unknown", "Child", "Young Adult", "Adult", "Elderly"]
-  age_groups = data.cut(train.Age, bins, labels = names, retbins = True)
+  age_groups = pd.cut(data.Age, bins, labels = names)
+  data.Age = age_groups
   return data
  
 #Many entries don't have a value for cabin, but for those that do, cabin might provide a lot of predictive power. 

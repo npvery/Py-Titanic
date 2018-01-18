@@ -44,7 +44,7 @@ def simplify_cabin(data):
 train.describe()
 def simplify_fares(data):
   data.Fare = data.Fare.replace(np.nan, -0.5)
-  bins = (-1, 0, FILL WITH QUARTILES)
+  bins = (-1, 0, 7.9, 14.5, 31, 62)
   names = ["Unknown", "first-quartile", "second-quartile", "third-quartile", "fourth-quartile"]
   data.Fare = pd.cut(data.Fare, bins, labels = names)
   return data

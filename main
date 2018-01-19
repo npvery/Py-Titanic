@@ -64,13 +64,18 @@ def transform(data):
   simplify_names(data)
   drop_useless(data)
   return data
-
+  
 train = transform(train)
 test = transform(test)
+
+###Take a look at your beautiful data!
 train.head(5)
 test.head(5)
+#How many unique last names were there?
+len(train["Last-Name"].unique())
 
 
+###Normalize labels. 
 
 
 
